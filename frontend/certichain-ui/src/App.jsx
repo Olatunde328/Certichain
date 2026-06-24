@@ -5,8 +5,13 @@ function App() {
   const [wallet, setWallet] = useState("");
 
   const handleConnect = async () => {
-    await connectWallet();
-    setWallet("Connected");
+    const response = await connectWallet();
+
+    const stacksAddress = response?.addresses?.find(
+      (item) => item.address?.startsWith("ST") || item.address?.startsWith("SP")
+    )?.address;
+
+    setWallet(stacksAddress || "Connected");
   };
 
   return (
@@ -22,7 +27,7 @@ function App() {
 
       {wallet && (
         <p>
-          <strong>Wallet Status:</strong> {wallet}
+          <strong>Connected Wallet:</strong> {wallet}
         </p>
       )}
 
