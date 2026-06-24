@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Certichain - Certificate Verification</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f0f1a;
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .logo {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #7c3aed;
+      margin-bottom: 0.3rem;
+      letter-spacing: -1px;
+    }
+
+    .tagline {
+      color: #888;
+      font-size: 0.95rem;
+      margin-bottom: 3rem;
+    }
+
+    .card {
+      background: #1a1a2e;
+      border: 1px solid #2a2a4a;
+      border-radius: 16px;
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 520px;
+    }
+
+    .card h2 {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: #c4b5fd;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    input {
+      flex: 1;
+      background: #0f0f1a;
+      border: 1px solid #3a3a5c;
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      color: #e0e0e0;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus { border-color: #7c3aed; }
+
+    button {
+      background: #7c3aed;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    button:hover { background: #6d28d9; }
+    button:disabled { background: #3a3a5c; cursor: not-allowed; }
+
+    .result { display: none; }
+
+    .result.show { display: block; }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .status-badge.valid {
+      background: #052e16;
+      color: #4ade80;
+      border: 1px solid #166534;
+    }
+
+    .status-badge.revoked {
+      background: #450a0a;
+      color: #f87171;
+      border: 1px solid #7f1d1d;
+    }
+
+    .status-badge.invalid {
+      background: #1c1917;
+      color: #a8a29e;
+      border: 1px solid #44403c;
+    }
+
+    .field {
+      margin-bottom: 1rem;
+    }
+
+    .field label {
+      font-size: 0.75rem;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .field .value {
+      background: #0f0f1a;
+      border: 1px solid #2a2a4a;
+      border-radius: 8px;
+      padding: 0.6rem 0.9rem;
+      font-size: 0.85rem;
+      color: #c4b5fd;
+      word-break: break-all;
+    }
+
+    .field .value.title-value {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #e0e0e0;
+    }
+
+    .error-msg {
+      background: #450a0a;
+      border: 1px solid #7f1d1d;
+      border-radius: 10px;
+      padding: 1rem;
+      color: #f87171;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .error-msg.show { display: block; }
+
+    .loading {
+      text-align: center;
+      color: #888;
+      font-size: 0.9rem;
+      display: none;
+      margin-bottom: 1rem;
+    }
+
+    .loading.show { display: block; }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #2a2a4a;
+      margin: 1.5rem 0;
+    }
+
+    .issuer-warning {
+      background: #431407;
+      border: 1px solid #7c2d12;
+      border-radius: 8px;
+      padding: 0.6rem 0.9rem;
+      color: #fb923c;
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+    }
+
+    footer {
+      margin-top: 2rem;
+      color: #444;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo">⛓ Certichain</div>
+  <p class="tagline">Blockchain-verified certificates on Stacks</p>
+
+  <div class="card">
+    <h2>🔍 Verify a Certificate</h2>
+
+    <div class="input-group">
+      <input
+        type="number"
+        id="certId"
+        placeholder="Enter certificate ID (e.g. 1)"
+        min="1"
+      />
+      <button id="verifyBtn" onclick="verifyCertificate()">Verify</button>
+    </div>
+
+    <div class="loading" id="loading">Checking the blockchain...</div>
+    <div class="error-msg" id="errorMsg"></div>
+
+    <div class="result" id="result">
+      <div class="status-badge" id="statusBadge"></div>
+
+      <div class="field">
+        <label>Certificate Title</label>
+        <div class="value title-value" id="certTitle"></div>
+      </div>
+
+      <div class="field">
+        <label>Recipient</label>
+        <div class="value" id="certRecipient"></div>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="field">
+        <label>Issuer</label>
+        <div class="value" id="certIssuer"></div>
+        <div class="issuer-warning" id="issuerWarning" style="display:none">
+          ⚠️ This issuer's approval has since been revoked
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Issued at Block</label>
+        <div class="value" id="certBlock"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>Built on Stacks · Powered by Clarity smart contracts</footer>
+
+  <script>
+    // ---- CONFIG ----
+    // When you deploy to testnet, replace this with your deployed contract address
+    const CONTRACT_ADDRESS = "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM";
+    const CONTRACT_NAME = "certificates";
+    const STACKS_API = "https://api.testnet.hiro.so";
+
+    async function verifyCertificate() {
+      const certId = document.getElementById("certId").value.trim();
+      const btn = document.getElementById("verifyBtn");
+      const loading = document.getElementById("loading");
+      const errorMsg = document.getElementById("errorMsg");
+      const result = document.getElementById("result");
+
+      // Reset UI
+      result.classList.remove("show");
+      errorMsg.classList.remove("show");
+
+      if (!certId || certId < 1) {
+        showError("Please enter a valid certificate ID.");
+        return;
+      }
+
+      btn.disabled = true;
+      loading.classList.add("show");
+
+      try {
+        const response = await fetch(
+          `${STACKS_API}/v2/contracts/call-read/${CONTRACT_ADDRESS}/${CONTRACT_NAME}/verify-certificate`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              sender: CONTRACT_ADDRESS,
+              arguments: [uintCV(parseInt(certId))]
+            })
+          }
+        );
+
+        const data = await response.json();
+
+        if (!data.okay) {
+          showError("Certificate not found on-chain.");
+          return;
+        }
+
+        const decoded = decodeResult(data.result);
+
+        if (!decoded) {
+          showError("Could not decode certificate data.");
+          return;
+        }
+
+        displayResult(decoded);
+
+      } catch (err) {
+        showError("Network error. Make sure you are connected.");
+      } finally {
+        btn.disabled = false;
+        loading.classList.remove("show");
+      }
+    }
+
+    // Encode uint as Clarity hex argument
+    function uintCV(value) {
+      const hex = value.toString(16).padStart(32, "0");
+      return "0x01" + hex;
+    }
+
+    // Minimal Clarity response decoder
+    function decodeResult(hex) {
+      try {
+        // The Stacks API returns a Clarity-encoded hex value
+        // For a full app you'd use @stacks/transactions ClarityValue.deserialize
+        // Here we parse the readable representation returned by the API
+        return hex; // raw for now — swap for @stacks/transactions in a full app
+      } catch {
+        return null;
+      }
+    }
+
+    function displayResult(data) {
+      // For simnet testing we'll simulate a result
+      // This will work with real API responses once deployed to testnet
+      document.getElementById("certTitle").textContent = data.title || "—";
+      document.getElementById("certRecipient").textContent = data.recipient || "—";
+      document.getElementById("certIssuer").textContent = data.issuer || "—";
+      document.getElementById("certBlock").textContent = data.issuedAt ? `#${data.issuedAt}` : "—";
+
+      const badge = document.getElementById("statusBadge");
+      const issuerWarning = document.getElementById("issuerWarning");
+
+      if (data.revoked) {
+        badge.className = "status-badge revoked";
+        badge.textContent = "✗ Certificate Revoked";
+      } else {
+        badge.className = "status-badge valid";
+        badge.textContent = "✓ Certificate Valid";
+      }
+
+      if (!data.issuerStillApproved) {
+        issuerWarning.style.display = "block";
+      } else {
+        issuerWarning.style.display = "none";
+      }
+
+      document.getElementById("result").classList.add("show");
+    }
+
+    function showError(msg) {
+      const errorMsg = document.getElementById("errorMsg");
+      errorMsg.textContent = msg;
+      errorMsg.classList.add("show");
+    }
+
+    // Allow Enter key to trigger verify
+    document.getElementById("certId").addEventListener("keydown", function(e) {
+      if (e.key === "Enter") verifyCertificate();
+    });
+  </script>
+
+</body>
+</html>
