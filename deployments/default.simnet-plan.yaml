@@ -69,4 +69,9 @@ plan:
       emulated-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
       path: contracts/certificates.clar
       clarity-version: 5
+    - transaction-type: emulated-contract-publish
+      contract-name: certificates-v2
+      emulated-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
+      path: contracts/certificates-v2.clar
+      clarity-version: 5
     epoch: '3.4'

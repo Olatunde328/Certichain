@@ -8,10 +8,10 @@ plan:
   - id: 0
     transactions:
     - transaction-type: contract-publish
-      contract-name: certificates
+      contract-name: certificates-v2
       expected-sender: ST16E9MWDY1EYY2EKRAH8YV2MK9SQG8D4GFZ68MTC
-      cost: 25140
-      path: contracts/certificates.clar
+      cost: 25010
+      path: contracts/certificates-v2.clar
       anchor-block-only: true
       clarity-version: 5
     epoch: '3.4'

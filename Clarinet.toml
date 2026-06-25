@@ -27,3 +27,8 @@ check_checker = { trusted_sender = false, trusted_caller = false, callee_filter 
 path = "contracts/certificates.clar"
 clarity_version = 5
 epoch = "latest"
+
+[contracts.certificates-v2]
+path = "contracts/certificates-v2.clar"
+clarity_version = 5
+epoch = "latest"
