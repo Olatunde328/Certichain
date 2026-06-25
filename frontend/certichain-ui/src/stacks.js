@@ -6,7 +6,7 @@ import {
 } from "@stacks/transactions";
 
 const CONTRACT_ADDRESS = "ST16E9MWDY1EYY2EKRAH8YV2MK9SQG8D4GFZ68MTC";
-const CONTRACT_NAME = "certificates";
+const CONTRACT_NAME = "certificates-v2";
 
 export const connectWallet = async () => {
   try {
