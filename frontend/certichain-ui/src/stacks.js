@@ -1,7 +1,9 @@
-import { connect } from "@stacks/connect";
+import { connect, openContractCall } from "@stacks/connect";
 import {
   cvToJSON,
   fetchCallReadOnlyFunction,
+  principalCV,
+  stringAsciiCV,
   uintCV,
 } from "@stacks/transactions";
 
@@ -15,6 +17,56 @@ export const connectWallet = async () => {
     console.error("Wallet connection failed:", error);
     return null;
   }
+};
+
+export const issueCertificate = async (recipient, title) => {
+  try {
+    alert("Opening Xverse to issue certificate...");
+
+    return await openContractCall({
+      contractAddress: CONTRACT_ADDRESS,
+      contractName: CONTRACT_NAME,
+      functionName: "issue-certificate",
+      functionArgs: [principalCV(recipient), stringAsciiCV(title)],
+      network: "testnet",
+      appDetails: {
+        name: "Certichain",
+        icon: window.location.origin + "/vite.svg",
+      },
+      onFinish: (data) => {
+        console.log("Issue certificate transaction:", data);
+        alert(`Certificate issue transaction submitted: ${data.txId}`);
+      },
+      onCancel: () => {
+        alert("Transaction cancelled.");
+      },
+    });
+  } catch (error) {
+    console.error("Issue certificate error:", error);
+    alert(`Issue certificate error: ${error.message || error}`);
+    throw error;
+  }
+};
+
+export const approveIssuer = async (issuer) => {
+  return await openContractCall({
+    contractAddress: CONTRACT_ADDRESS,
+    contractName: CONTRACT_NAME,
+    functionName: "approve-issuer",
+    functionArgs: [principalCV(issuer)],
+    network: "testnet",
+    appDetails: {
+      name: "Certichain",
+      icon: window.location.origin + "/vite.svg",
+    },
+    onFinish: (data) => {
+      console.log("Approve issuer transaction:", data);
+      alert(`Approve issuer transaction submitted: ${data.txId}`);
+    },
+    onCancel: () => {
+      alert("Transaction cancelled.");
+    },
+  });
 };
 
 export const verifyCertificate = async (
