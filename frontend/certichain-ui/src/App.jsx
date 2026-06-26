@@ -28,7 +28,7 @@ function App() {
 
     if (stacksAddress) {
       setWallet(stacksAddress);
-      setMessage("Wallet connected successfully.");
+      setMessage("✅ Wallet connected. Ready to issue blockchain-backed credentials.");
     } else {
       setMessage("Wallet connection was cancelled or unsuccessful.");
     }
@@ -95,7 +95,7 @@ function App() {
         setMessage(`Certificate ID ${id} was not found.`);
       } else {
         setCertificate(found);
-        setMessage("Certificate verified successfully.");
+        setMessage("🛡 Credential verified successfully. This credential is authentic and recorded on the Stacks blockchain.");
       }
     } catch (error) {
       console.error(error);
@@ -111,7 +111,7 @@ function App() {
         <p style={styles.badge}>Stacks Testnet • Clarity Smart Contract</p>
         <h1 style={styles.title}>Certichain</h1>
         <p style={styles.subtitle}>
-          Issue and verify tamper-resistant academic certificates on the blockchain.
+          Secure Academic Credentials. Instant Blockchain Verification.
         </p>
 
         <button style={styles.primaryButton} onClick={handleConnect}>
@@ -125,11 +125,26 @@ function App() {
         )}
       </section>
 
+      <section style={styles.stats}>
+        <div style={styles.statCard}>
+          <strong>🟢 Contract</strong>
+          <span>Deployed</span>
+        </div>
+        <div style={styles.statCard}>
+          <strong>🔐 Network</strong>
+          <span>Stacks Testnet</span>
+        </div>
+        <div style={styles.statCard}>
+          <strong>🛡 Security</strong>
+          <span>Immutable Records</span>
+        </div>
+      </section>
+
       {message && <div style={styles.message}>{message}</div>}
 
       <section style={styles.grid}>
         <div style={styles.card}>
-          <h2>Issuer Panel</h2>
+          <h2>Institution Portal</h2>
           <p style={styles.cardText}>
             Approve an issuer, then issue a blockchain-backed certificate.
           </p>
@@ -160,7 +175,7 @@ function App() {
         </div>
 
         <div style={styles.card}>
-          <h2>Public Verification</h2>
+          <h2>Credential Verification</h2>
           <p style={styles.cardText}>
             Anyone can verify a certificate ID without connecting a wallet.
           </p>
@@ -307,6 +322,23 @@ const styles = {
     padding: "14px 18px",
     borderRadius: "12px",
     background: "rgba(56, 189, 248, 0.12)",
+    color: "#e0f2fe",
+  },
+  stats: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(190px, 1fr))",
+    gap: "16px",
+    maxWidth: "1000px",
+    margin: "0 auto 28px",
+  },
+  statCard: {
+    background: "rgba(15, 23, 42, 0.75)",
+    border: "1px solid rgba(125, 211, 252, 0.25)",
+    borderRadius: "18px",
+    padding: "20px",
+    display: "grid",
+    gap: "8px",
+    textAlign: "center",
     color: "#e0f2fe",
   },
   certificate: {
