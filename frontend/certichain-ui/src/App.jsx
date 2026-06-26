@@ -110,6 +110,11 @@ function App() {
   return (
     <main style={styles.page}>
       <section style={styles.hero}>
+        <img
+          src={logo}
+          alt="Certichain Logo"
+          style={styles.logo}
+        />
         <p style={styles.badge}>Stacks Testnet • Clarity Smart Contract</p>
         <h1 style={styles.title}>Certichain</h1>
         <p style={styles.subtitle}>
@@ -249,6 +254,14 @@ const styles = {
     margin: "0 auto 32px",
     textAlign: "center",
   },
+  logo: {
+    width: "120px",
+    height: "120px",
+    margin: "0 auto 20px",
+    display: "block",
+    objectFit: "contain",
+  },
+
   badge: {
     display: "inline-block",
     padding: "8px 14px",
