@@ -129,31 +129,35 @@ Anyone can verify the credential instantly using its Certificate ID.
 
 # 📸 Screenshots
 
-> *(Add screenshots before submission)*
+## 🏠 Home
 
-## Home
-
-`docs/screenshots/home.png`
-
----
-
-## Wallet Connected
-
-`docs/screenshots/wallet.png`
+<p align="center">
+  <img src="docs/screenshots/home.png" width="900"/>
+</p>
 
 ---
 
-## Issue Credential
+## 🔗 Wallet Connected
 
-`docs/screenshots/issue.png`
+<p align="center">
+  <img src="docs/screenshots/wallet.png" width="900"/>
+</p>
+
+---
+
+## 📜 Issue Credential
+
+<p align="center">
+  <img src="docs/screenshots/issue.png" width="900"/>
+</p>
 
 ---
 
-## Verified Digital Credential
+## ✅ Verified Digital Credential
 
-`docs/screenshots/verify.png`
-
----
+<p align="center">
+  <img src="docs/screenshots/verify.png" width="900"/>
+</p>
 
 # 💻 Tech Stack
 
