@@ -1,91 +1,250 @@
-# Certichain
+# <p align="center"><img src="docs/assets/certichain-logo.png" width="180"></p>
 
-Certichain is a decentralized certificate issuance and verification platform built on the Stacks blockchain. It allows approved issuers to create tamper-resistant academic certificates and allows anyone to verify certificate authenticity publicly on-chain.
+# <p align="center">CERTICHAIN</p>
 
-## Problem
+## <p align="center">Secure Academic Credentials. Instant Blockchain Verification.</p>
 
-Fake academic certificates are a serious problem for schools, employers, and graduates. Traditional certificate verification is often slow, manual, and dependent on contacting institutions directly.
+<p align="center">
 
-## Solution
+A decentralized platform for issuing and verifying tamper-resistant academic credentials on the **Stacks Blockchain**.
 
-Certichain stores certificate records on-chain so that verification becomes public, fast, and tamper-resistant. Each certificate is issued by an approved wallet and can be verified using a certificate ID.
+</p>
 
-## Live Testnet Contract
+---
 
-`ST16E9MWDY1EYY2EKRAH8YV2MK9SQG8D4GFZ68MTC.certificates-v2`
+# 📖 Overview
 
-## Key Features
+Academic certificate fraud remains a significant challenge for educational institutions, employers, and graduates. Traditional verification methods are often slow, manual, and susceptible to document forgery.
 
-- Connect Xverse wallet
-- Approve issuer wallet
-- Issue blockchain-backed certificates
-- Verify certificate by ID
-- Display certificate title, issuer, recipient, status, and block height
-- Public verification without wallet connection
-- Built with Clarity smart contracts and React
+**Certichain** solves this problem by enabling trusted institutions to issue blockchain-backed academic credentials that anyone can verify instantly through the Stacks blockchain.
 
-## Tech Stack
+Instead of contacting schools or relying on paper documents, employers and institutions can verify credentials publicly, securely, and transparently.
 
-- Clarity
-- Clarinet
-- Stacks Testnet
-- React
-- Vite
-- Xverse Wallet
-- Stacks.js
+---
 
-## Smart Contract Functions
+# ✨ Key Features
 
-### approve-issuer
-Allows the admin wallet to approve trusted certificate issuers.
+* 🔐 Secure Xverse Wallet Authentication
+* 🏛 Institution Issuer Approval
+* 📜 Blockchain Certificate Issuance
+* 🛡 Public Certificate Verification
+* ⛓ Immutable On-chain Credential Storage
+* ⚡ Fast Verification by Certificate ID
+* 🎨 Modern Responsive React Interface
+* 🌐 Built on Stacks Testnet
 
-### issue-certificate
-Allows approved issuers to issue certificates to recipients.
+---
 
-### verify-certificate
-Allows anyone to verify a certificate by ID.
+# 🚀 Live Smart Contract
 
-### revoke-certificate
-Allows the admin to revoke a certificate if needed.
+**Network**
 
-## Demo Flow
+Stacks Testnet
 
-1. Connect Xverse wallet on Stacks Testnet.
-2. Approve wallet as issuer.
-3. Enter recipient wallet address and certificate title.
-4. Issue certificate.
-5. Confirm transaction on Stacks Testnet.
-6. Use the returned certificate ID to verify the certificate.
-7. View certificate details and verification status.
+**Contract**
 
-## Example Certificate
+```
+ST16E9MWDY1EYY2EKRAH8YV2MK9SQG8D4GFZ68MTC.certificates-v2
+```
 
-Certificate ID: `2`
+---
 
-Title: `Bachelor of Computer Engineering`
+# 🏗 Architecture
 
-Issuer: `ST16E9MWDY1EYY2EKRAH8YV2MK9SQG8D4GFZ68MTC`
+```
+                Institution
 
-Recipient: `ST16E9MWDY1EYY2EKRAH8YV2MK9SQG8D4GFZ68MTC`
+                     │
 
-## Project Status
+                     ▼
 
-- Smart contract deployed on Stacks Testnet
-- Frontend connected to Xverse wallet
-- Certificate issuance working
-- Certificate verification working
-- End-to-end demo completed
+             React Frontend
 
-## Future Improvements
+                     │
 
-- Institution dashboard
-- QR code verification
-- Certificate PDF export
-- Mainnet deployment
-- Multi-institution issuer management
-- Public verification links
-- NFT-backed certificates
+                     ▼
 
-## Author
+         Stacks Connect + Xverse
 
-Built by Olatunde Olagoke.
+                     │
+
+                     ▼
+
+        Clarity Smart Contract
+
+                     │
+
+                     ▼
+
+          Stacks Testnet Blockchain
+```
+
+---
+
+# ⚙ Smart Contract Functions
+
+| Function           | Description                           |
+| ------------------ | ------------------------------------- |
+| approve-issuer     | Approves trusted issuing institutions |
+| revoke-issuer      | Removes issuer authorization          |
+| issue-certificate  | Issues blockchain credentials         |
+| verify-certificate | Verifies credential authenticity      |
+| revoke-certificate | Revokes compromised credentials       |
+| check-issuer       | Checks issuer authorization           |
+| get-cert-count     | Returns total issued credentials      |
+
+---
+
+# 🎯 Demo Workflow
+
+### 1️⃣ Connect Wallet
+
+Authenticate using the Xverse Wallet on Stacks Testnet.
+
+↓
+
+### 2️⃣ Approve Issuer
+
+The administrator authorizes an institution to issue credentials.
+
+↓
+
+### 3️⃣ Issue Credential
+
+Enter the recipient wallet address and credential title.
+
+↓
+
+### 4️⃣ Blockchain Storage
+
+The credential is permanently recorded on-chain.
+
+↓
+
+### 5️⃣ Verify Credential
+
+Anyone can verify the credential instantly using its Certificate ID.
+
+---
+
+# 📸 Screenshots
+
+> *(Add screenshots before submission)*
+
+## Home
+
+`docs/screenshots/home.png`
+
+---
+
+## Wallet Connected
+
+`docs/screenshots/wallet.png`
+
+---
+
+## Issue Credential
+
+`docs/screenshots/issue.png`
+
+---
+
+## Verified Digital Credential
+
+`docs/screenshots/verify.png`
+
+---
+
+# 💻 Tech Stack
+
+* Clarity
+* Stacks Blockchain
+* Clarinet
+* React
+* Vite
+* JavaScript
+* Stacks.js
+* Xverse Wallet
+* GitHub Codespaces
+
+---
+
+# 📂 Project Structure
+
+```
+Certichain/
+
+├── contracts/
+│   ├── certificates.clar
+│   └── certificates-v2.clar
+│
+├── frontend/
+│   └── certichain-ui/
+│
+├── tests/
+│
+├── deployments/
+│
+├── docs/
+│   ├── assets/
+│   │   └── certichain-logo.png
+│   │
+│   └── screenshots/
+│
+└── README.md
+```
+
+---
+
+# ▶ Running Locally
+
+### Smart Contract
+
+```bash
+clarinet check
+
+npm test
+```
+
+### Frontend
+
+```bash
+cd frontend/certichain-ui
+
+npm install
+
+npm run dev
+```
+
+---
+
+# 🌍 Why Stacks?
+
+Stacks enables secure smart contracts anchored to Bitcoin while supporting expressive smart contract development through Clarity.
+
+Certichain leverages these capabilities to provide a trustworthy platform for issuing and verifying academic credentials with transparency and permanence.
+
+---
+
+# 🔮 Future Roadmap
+
+* 📱 QR Code Verification
+* 🏫 Institution Dashboard
+* 🌍 Public Verification Portal
+* 📄 PDF Credential Export
+* 🔔 Verification Notifications
+* 🌐 Mainnet Deployment
+* 🪪 NFT-backed Credentials
+* 🏢 Multi-Institution Support
+
+---
+
+# 👨‍💻 Author
+
+**Olatunde Olagoke**
+
+Built with passion for secure, transparent, and verifiable academic credentials using the Stacks Blockchain.
+
+---
+
+# ⭐ If you found this project interesting, please consider giving it a star.

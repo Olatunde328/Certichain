@@ -6,6 +6,8 @@ import {
   verifyCertificate,
 } from "./stacks";
 
+import logo from "./assets/certichain-logo.png";
+
 function App() {
   const [wallet, setWallet] = useState("");
   const [recipient, setRecipient] = useState("");
