@@ -144,6 +144,28 @@ Anyone can verify the credential instantly using its Certificate ID.
 - ✅ Verified on Talent Protocol
 
 
+
+
+## 🌐 Production Deployment
+
+Certichain is deployed on **Stacks Mainnet**.
+
+### Mainnet Contract Identifier
+
+`SP16E9MWDY1EYY2EKRAH8YV2MK9SQG8D4GFXKRGJN.certificates-v2`
+
+### Network
+
+- **Stacks Mainnet**
+
+### Development Journey
+
+- ✅ Developed using Clarinet
+- ✅ Tested on Stacks Testnet
+- ✅ Successfully deployed to Stacks Mainnet
+- ✅ Verified by Talent Protocol
+
+
 # 📸 Screenshots
 
 ## 🏠 Home
