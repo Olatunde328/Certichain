@@ -127,6 +127,23 @@ Anyone can verify the credential instantly using its Certificate ID.
 
 ---
 
+
+## 🌐 Mainnet Deployment
+
+**Network:** Stacks Mainnet
+
+**Mainnet Contract Identifier:**
+
+`SP16E9MWDY1EYY2EKRAH8YV2MK9SQG8D4GFXKRGJN.certificates-v2`
+
+### Development Journey
+
+- ✅ Smart contract developed with Clarity
+- ✅ Tested on Stacks Testnet
+- ✅ Successfully deployed to Stacks Mainnet
+- ✅ Verified on Talent Protocol
+
+
 # 📸 Screenshots
 
 ## 🏠 Home
