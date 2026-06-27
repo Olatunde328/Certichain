@@ -12,3 +12,4 @@ coverage
 costs-reports.json
 node_modules
 settings/Testnet.toml
+settings/Mainnet.toml
