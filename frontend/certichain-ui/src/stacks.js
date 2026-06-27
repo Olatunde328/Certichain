@@ -28,7 +28,7 @@ export const issueCertificate = async (recipient, title) => {
       contractName: CONTRACT_NAME,
       functionName: "issue-certificate",
       functionArgs: [principalCV(recipient), stringAsciiCV(title)],
-      network: "testnet",
+      network: "mainnet",
       appDetails: {
         name: "Certichain",
         icon: window.location.origin + "/vite.svg",
@@ -54,7 +54,7 @@ export const approveIssuer = async (issuer) => {
     contractName: CONTRACT_NAME,
     functionName: "approve-issuer",
     functionArgs: [principalCV(issuer)],
-    network: "testnet",
+    network: "mainnet",
     appDetails: {
       name: "Certichain",
       icon: window.location.origin + "/vite.svg",
@@ -79,7 +79,7 @@ export const verifyCertificate = async (
     functionName: "verify-certificate",
     functionArgs: [uintCV(BigInt(certificateId))],
     senderAddress,
-    network: "testnet",
+    network: "mainnet",
   });
 
   const decoded = cvToJSON(result);
